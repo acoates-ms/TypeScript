@@ -869,22 +869,46 @@ namespace ts {
     }
 
     /** Return the file if it exists. */
-    function tryFile(fileName: string, failedLookupLocations: Push<string>, onlyRecordFailures: boolean, state: ModuleResolutionState): string | undefined {
-        if (!onlyRecordFailures) {
-            if (state.host.fileExists(fileName)) {
-                if (state.traceEnabled) {
-                    trace(state.host, Diagnostics.File_0_exist_use_it_as_a_name_resolution_result, fileName);
-                }
-                return fileName;
-            }
-            else {
-                if (state.traceEnabled) {
-                    trace(state.host, Diagnostics.File_0_does_not_exist, fileName);
+    function tryFile(file: string, failedLookupLocations: Push<string>, onlyRecordFailures: boolean, state: ModuleResolutionState): string | undefined {
+
+        if (state.compilerOptions.resolutionPlatforms){
+            for(let platform of state.compilerOptions.resolutionPlatforms) {
+                let result = tryFileInner(platform);
+                if (result) {
+                    return result;
                 }
             }
         }
-        failedLookupLocations.push(fileName);
-        return undefined;
+
+        return tryFileInner(null);
+
+        function tryFileInner(platform: string): string | undefined {
+            
+            let fileName = file;
+            if (platform) {
+              let lastDot = file.lastIndexOf('.');
+              if (lastDot === -1) {
+                  return undefined;
+              }
+              fileName = file.slice(0, lastDot + 1) + platform + file.slice(lastDot);
+            }
+
+            if (!onlyRecordFailures) {
+                if (state.host.fileExists(fileName)) {
+                    if (state.traceEnabled) {
+                        trace(state.host, Diagnostics.File_0_exist_use_it_as_a_name_resolution_result, fileName);
+                    }
+                    return fileName;
+                }
+                else {
+                    if (state.traceEnabled) {
+                        trace(state.host, Diagnostics.File_0_does_not_exist, fileName);
+                    }
+                }
+            }
+            failedLookupLocations.push(fileName);
+            return undefined;
+        }
     }
 
     function loadNodeModuleFromDirectory(extensions: Extensions, candidate: string, failedLookupLocations: Push<string>, onlyRecordFailures: boolean, state: ModuleResolutionState, considerPackageJson = true) {
