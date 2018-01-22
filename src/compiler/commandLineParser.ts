@@ -396,7 +396,17 @@ namespace ts {
             category: Diagnostics.Module_Resolution_Options,
             description: Diagnostics.Do_not_resolve_the_real_path_of_symlinks,
         },
-
+        {
+            name: "resolutionPlatforms",
+            type: "list",
+            element: {
+                name: "types",
+                type: "string"
+            },
+            showInSimplifiedHelpView: true,
+            category: Diagnostics.Module_Resolution_Options,
+            description: Diagnostics.List_of_platform_extensions_to_fallback_on
+         },
         // Source Maps
         {
             name: "sourceRoot",

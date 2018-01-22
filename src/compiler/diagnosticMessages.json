@@ -3722,6 +3722,10 @@
         "category": "Message",
         "code": 90028
     },
+    "List of platform extensions to fallback on": {
+        "category": "Message",
+        "code": 910044
+    },
     "Convert function to an ES2015 class": {
         "category": "Message",
         "code": 95001
