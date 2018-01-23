@@ -2787,6 +2787,12 @@
               </Str>
               <Disp Icon="Str" />
             </Item>
+            <Item ItemId=";List_of_platform_extensions_to_fallback_on_910044" ItemType="0" PsrId="306" Leaf="true">
+              <Str Cat="Text">
+                <Val><![CDATA[List of platform extensions to fallback on]]></Val>
+              </Str>
+              <Disp Icon="Str" />
+            </Item>
             <Item ItemId=";List_of_root_folders_whose_combined_content_represents_the_structure_of_the_project_at_runtime_6168" ItemType="0" PsrId="306" Leaf="true">
               <Str Cat="Text">
                 <Val><![CDATA[List of root folders whose combined content represents the structure of the project at runtime.]]></Val>
