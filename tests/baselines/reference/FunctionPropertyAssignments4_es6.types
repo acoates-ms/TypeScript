@@ -1,6 +1,0 @@
-=== tests/cases/conformance/es6/functionPropertyAssignments/FunctionPropertyAssignments4_es6.ts ===
-var v = { * }
->v : { (Missing)(): any; }
->{ * } : { (Missing)(): any; }
-> : () => any
-

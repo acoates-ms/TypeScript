@@ -1,6 +1,0 @@
-=== tests/cases/conformance/parser/ecmascript5/parserImportDeclaration1.ts ===
-import TypeScript = TypeScriptServices.TypeScript;
->TypeScript : any
->TypeScriptServices : No type information available!
->TypeScript : No type information available!
-
