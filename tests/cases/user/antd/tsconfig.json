@@ -1,8 +1,0 @@
-{
-    "compilerOptions": {
-        "strict": true,
-        "lib": ["es2015", "dom"],
-        "types": [],
-        "allowSyntheticDefaultImports": true
-    }
-}
