@@ -1,5 +1,0 @@
-=== tests/cases/compiler/primitiveTypeAsInterfaceNameGeneric.ts ===
-interface number<T> {}
->number : number<T>
->T : T
-

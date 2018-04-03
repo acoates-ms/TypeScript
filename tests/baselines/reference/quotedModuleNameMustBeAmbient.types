@@ -1,7 +1,0 @@
-=== tests/cases/compiler/quotedModuleNameMustBeAmbient.ts ===
-module 'M' {}
->'M' : typeof 'M'
-
-declare module 'M2' {}
->'M2' : typeof 'M2'
-
