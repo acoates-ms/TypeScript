@@ -2346,6 +2346,7 @@ declare namespace ts {
         reactNamespace?: string;
         jsxFactory?: string;
         removeComments?: boolean;
+        resolutionPlatforms?: string[];
         rootDir?: string;
         rootDirs?: string[];
         skipLibCheck?: boolean;
