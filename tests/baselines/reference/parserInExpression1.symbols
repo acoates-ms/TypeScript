@@ -1,4 +1,0 @@
-=== tests/cases/conformance/parser/ecmascript5/parserInExpression1.ts ===
-console.log("a" in { "a": true });
->"a" : Symbol("a", Decl(parserInExpression1.ts, 0, 20))
-

@@ -1,9 +1,0 @@
-=== tests/cases/compiler/emptyTypeArgumentList.ts ===
-function foo<T>() { }
->foo : <T>() => void
->T : T
-
-foo<>();
->foo<>() : any
->foo : <T>() => void
-
