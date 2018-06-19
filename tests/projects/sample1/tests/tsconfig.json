@@ -1,7 +1,0 @@
-{
-    "references": [
-        { "path": "../core" },
-        { "path": "../logic" }
-    ],
-    "files": ["index.ts"]
-}

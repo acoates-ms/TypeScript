@@ -1,5 +1,0 @@
-=== tests/cases/compiler/catchClauseWithTypeAnnotation.ts ===
-try {
-} catch (e: any) {
->e : any
-}
