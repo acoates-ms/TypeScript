@@ -640,7 +640,17 @@ namespace ts {
             category: Diagnostics.Module_Resolution_Options,
             description: Diagnostics.Allow_accessing_UMD_globals_from_modules,
         },
-
+        {
+            name: "resolutionPlatforms",
+            type: "list",
+            element: {
+                name: "types",
+                type: "string"
+            },
+            showInSimplifiedHelpView: true,
+            category: Diagnostics.Module_Resolution_Options,
+            description: Diagnostics.List_of_platform_extensions_to_fallback_on
+         },
         // Source Maps
         {
             name: "sourceRoot",
