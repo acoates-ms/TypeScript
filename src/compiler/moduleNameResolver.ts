@@ -1109,22 +1109,50 @@ namespace ts {
     }
 
     /** Return the file if it exists. */
-    function tryFile(fileName: string, onlyRecordFailures: boolean, state: ModuleResolutionState): string | undefined {
-        if (!onlyRecordFailures) {
-            if (state.host.fileExists(fileName)) {
-                if (state.traceEnabled) {
-                    trace(state.host, Diagnostics.File_0_exist_use_it_as_a_name_resolution_result, fileName);
-                }
-                return fileName;
-            }
-            else {
-                if (state.traceEnabled) {
-                    trace(state.host, Diagnostics.File_0_does_not_exist, fileName);
+    function tryFile(file: string, onlyRecordFailures: boolean, state: ModuleResolutionState): string | undefined {
+
+      const resolution_platforms = (
+	(process.env['RESOLUTION_PLATFORMS'] && JSON.parse(process.env['RESOLUTION_PLATFORMS']))
+	    || state.compilerOptions.resolutionPlatforms);
+        if (resolution_platforms) {
+          for(let platform of resolution_platforms) {
+            let result = tryFileForPlatform(platform);
+                if (result) {
+                    return result;
                 }
             }
         }
-        state.failedLookupLocations.push(fileName);
-        return undefined;
+
+        return tryFileForPlatform();
+
+        function tryFileForPlatform(platform?: string): string | undefined {
+            let fileName = file;
+            if (platform) {
+                const forkableExtensions = [".d.ts", ".tsx", ".ts", ".json", ".js"];
+                for (const extension of forkableExtensions) {
+                    if (file.endsWith(extension)) {
+                        fileName = file.slice(0, file.length - extension.length) + `.${platform}${extension}`
+                        break;
+                    }
+                }
+            }
+
+            if (!onlyRecordFailures) {
+                if (state.host.fileExists(fileName)) {
+                    if (state.traceEnabled) {
+                        trace(state.host, Diagnostics.File_0_exist_use_it_as_a_name_resolution_result, fileName);
+                    }
+                    return fileName;
+                }
+                else {
+                    if (state.traceEnabled) {
+                        trace(state.host, Diagnostics.File_0_does_not_exist, fileName);
+                    }
+                }
+            }
+            state.failedLookupLocations.push(fileName);
+            return undefined;
+        }
     }
 
     function loadNodeModuleFromDirectory(extensions: Extensions, candidate: string, onlyRecordFailures: boolean, state: ModuleResolutionState, considerPackageJson = true) {
